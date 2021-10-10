@@ -1,0 +1,54 @@
+name: UPDATE-BITBUCKET
+on:
+  push:
+    branches: [master]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest  
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: setup vue
+        run: |
+          npm install @vue/cli -g
+
+      - name: build
+        run: |
+          npm install
+          npm run build
+
+      - name: setup ssh
+        env:
+          SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan gitee.com >> ~/.ssh/known_hosts
+
+      - name: setup committer
+        env:
+          COMMITTER_EMAIL: ${{ secrets.COMMITTER_EMAIL }}
+          COMMITTER_NAME: ${{ secrets.COMMITTER_NAME }}
+        run: |
+          git config --global user.email "$COMMITTER_EMAIL"
+          git config --global user.name "$COMMITTER_NAME"
+
+      - name: push
+        env:
+          DEPLOY_REPO: ${{ secrets.DEPLOY_REPO }}
+        run: |
+          cd dist
+          git init
+          git add -A
+          git commit -m "temp"
+          git remote add origin "$DEPLOY_REPO"
+          git push -f --set-upstream origin master
