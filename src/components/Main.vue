@@ -68,7 +68,6 @@ export default {
             {english: 'your', phonogram: 'jʊr; jər', chinese: 'det. 你的，你们的'},
             {english: 'name', phonogram: 'neɪm', chinese: 'n. 名称，名字；姓名；名誉'},
             {english: 'this', phonogram: 'ðɪs', chinese: 'pron. 这，这个；这样；今，本；……的这个；有个'},
-            {english: 'is', phonogram: 'ɪz', chinese: 'v. 是（be 的第三人称单数）'},
             {english: 'pen', phonogram: 'pen', chinese: 'n. 钢笔；作家；围栏'},
             {english: 'book', phonogram: 'bʊk', chinese: 'n. 书籍；卷；账簿；名册；工作簿'},
             {english: 'bag', phonogram: 'bæɡ', chinese: 'n. 包；袋；猎获物；（俚）一瓶啤酒'},
