@@ -4,15 +4,25 @@
     <!-- 下拉菜单 -->
     <van-dropdown-menu active-color="#EE0A24">
       <van-dropdown-item v-model="level" disabled :options="levelOption" />
-      <van-dropdown-item @change="onUnitChanged" v-model="unit" :options="unitOption" />
+      <van-dropdown-item v-model="unit" :options="unitOption" @change="onUnitChanged" />
       <van-dropdown-item v-model="mode" :options="modeOption" />
     </van-dropdown-menu>
 
     <!-- 记单词模式 -->
     <div v-if="mode == 0">
       <van-cell-group inset>
-        <div @click="onRememberCardClicked" v-for="word in wordToRemember">
-          <van-cell clickable center size="large" :title="word.english" :label="'/' + word.phonogram + '/'" :value="word.chinese" />
+        <div v-for="word in wordToRemember" @click="onRememberCardClicked">
+          <van-cell
+            clickable
+            center
+            size="large"
+            title-class="english-to-remember"
+            label-class="phonogram-to-remember"
+            value-class="chinese-to-remember"
+            :title="word.english"
+            :label="'/' + word.phonogram + '/'"
+            :value="word.chinese"
+          />
           <audio :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=2'" :id="word.english"></audio>
         </div>
       </van-cell-group>
@@ -165,5 +175,15 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.english-to-remember {
+  font-size: xx-large;
+}
+.phonogram-to-remember {
+  font-size: large;
+}
+.chinese-to-remember {
+  font-size: large;
 }
 </style>
