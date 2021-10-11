@@ -10,15 +10,12 @@
 
     <!-- 记单词模式 -->
     <div v-if="mode == 0">
-      <van-row v-for="word in wordToRemember" type="flex" align="center">
-        <van-col span="23">
-          <van-cell center size="large" :title="word.english" :label="'/' + word.phonogram + '/'" :value="word.chinese" />
-        </van-col>
-        <van-col span="1">
-          <van-button @click="onRememberCardClicked" type="info" plain size="small" icon="volume-o" />
+      <van-cell-group inset>
+        <div @click="onRememberCardClicked" v-for="word in wordToRemember">
+          <van-cell clickable center size="large" :title="word.english" :label="'/' + word.phonogram + '/'" :value="word.chinese" />
           <audio :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=2'" :id="word.english"></audio>
-        </van-col>
-      </van-row>
+        </div>
+      </van-cell-group>
     </div>
 
     <!-- 背单词模式 -->
@@ -144,9 +141,9 @@ export default {
       this.wordToRemember = this.wordData[this.level][this.unit]
     },
 
-    // 记单词模式下按钮点击时播放单词发音
+    // 记单词模式下单词被点击时播放单词发音
     onRememberCardClicked: function(event) {
-      event.currentTarget.nextElementSibling.play()
+      event.currentTarget.querySelector("audio").play()
     }
 
   }
