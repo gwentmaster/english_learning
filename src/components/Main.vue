@@ -1,19 +1,27 @@
 <template>
   <div class="main">
 
+    <!-- 下拉菜单 -->
     <van-dropdown-menu active-color="#EE0A24">
       <van-dropdown-item v-model="level" disabled :options="levelOption" />
       <van-dropdown-item @change="onUnitChanged" v-model="unit" :options="unitOption" />
       <van-dropdown-item v-model="mode" :options="modeOption" />
     </van-dropdown-menu>
 
+    <!-- 记单词模式 -->
     <div v-if="mode == 0">
-      <div @click="onRememberCardClicked" v-for="word in wordToRemember">
-        <van-cell center :title="word.english" :label="'/' + word.phonogram + '/'" :value="word.chinese" />
-        <audio :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=2'" :id="word.english"></audio>
-      </div>
+      <van-row v-for="word in wordToRemember" type="flex" align="center">
+        <van-col span="23">
+          <van-cell center size="large" :title="word.english" :label="'/' + word.phonogram + '/'" :value="word.chinese" />
+        </van-col>
+        <van-col span="1">
+          <van-button @click="onRememberCardClicked" type="info" plain size="small" icon="volume-o" />
+          <audio :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=2'" :id="word.english"></audio>
+        </van-col>
+      </van-row>
     </div>
 
+    <!-- 背单词模式 -->
     <div v-if="mode == 1"><van-notice-bar text="功能开发中, 敬请期待." /></div>
 
   </div>
@@ -136,9 +144,9 @@ export default {
       this.wordToRemember = this.wordData[this.level][this.unit]
     },
 
-    // 记单词模式下单词被点击时播放单词发音
+    // 记单词模式下按钮点击时播放单词发音
     onRememberCardClicked: function(event) {
-      event.currentTarget.querySelector("audio").play()
+      event.currentTarget.nextElementSibling.play()
     }
 
   }
