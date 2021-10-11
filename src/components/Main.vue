@@ -10,22 +10,20 @@
 
     <!-- 记单词模式 -->
     <div v-if="mode == 0">
-      <van-cell-group inset>
-        <div v-for="word in wordToRemember" @click="onRememberCardClicked">
-          <van-cell
-            clickable
-            center
-            size="large"
-            title-class="english-to-remember"
-            label-class="phonogram-to-remember"
-            value-class="chinese-to-remember"
-            :title="word.english"
-            :label="'/' + word.phonogram + '/'"
-            :value="word.chinese"
-          />
-          <audio :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=2'" :id="word.english"></audio>
-        </div>
-      </van-cell-group>
+      <div v-for="word in wordToRemember" @click="onRememberCardClicked">
+        <van-cell
+          clickable
+          center
+          size="large"
+          title-class="english-to-remember"
+          label-class="phonogram-to-remember"
+          value-class="chinese-to-remember"
+          :title="word.english"
+          :label="'/' + word.phonogram + '/'"
+          :value="word.chinese"
+        />
+        <audio :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=2'" :id="word.english"></audio>
+      </div>
     </div>
 
     <!-- 背单词模式 -->

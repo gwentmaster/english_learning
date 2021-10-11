@@ -3,12 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { Cell, CellGroup, DropdownItem, DropdownMenu, List, NoticeBar } from 'vant'
+import { Cell, DropdownItem, DropdownMenu, List, NoticeBar } from 'vant'
 
 
 Vue.config.productionTip = false
 Vue.use(Cell)
-Vue.use(CellGroup)
 Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
 Vue.use(List)
