@@ -3,15 +3,17 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { Cell, DropdownItem, DropdownMenu, List, NoticeBar } from 'vant'
+import { Button, Card, Cell, DropdownItem, DropdownMenu, List, Progress } from 'vant'
 
 
 Vue.config.productionTip = false
+Vue.use(Button)
+Vue.use(Card)
 Vue.use(Cell)
 Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
 Vue.use(List)
-Vue.use(NoticeBar)
+Vue.use(Progress)
 
 /* eslint-disable no-new */
 new Vue({

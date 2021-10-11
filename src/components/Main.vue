@@ -5,7 +5,7 @@
     <van-dropdown-menu active-color="#EE0A24">
       <van-dropdown-item v-model="level" disabled :options="levelOption" />
       <van-dropdown-item v-model="unit" :options="unitOption" @change="onUnitChanged" />
-      <van-dropdown-item v-model="mode" :options="modeOption" />
+      <van-dropdown-item v-model="mode" :options="modeOption" @change="onModeChanged" />
     </van-dropdown-menu>
 
     <!-- 记单词模式 -->
@@ -27,7 +27,26 @@
     </div>
 
     <!-- 背单词模式 -->
-    <div v-if="mode == 1"><van-notice-bar text="功能开发中, 敬请期待." /></div>
+    <div v-if="mode == 1">
+      <van-progress stroke-width="8" :percentage="reviewPercentage" />
+      <van-card
+        class="review-card"
+        centered
+        :title="reviewContent"
+        :desc="reviewDesc"
+      >
+        <template #footer>
+          <van-button class="review-card-button" @click="resetReviewProgress">重置进度</van-button>
+          <van-button class="review-card-button" :disabled="reviewAnswerShowed" @click="onReviewAnswerButtonClicked">查看答案</van-button>
+          <van-button
+            class="review-card-button"
+            :disabled="reviewProcessButtonDisabled"
+            :text="reviewProcessButtonText"
+            @click="onReviewProcessButtonClicked"
+          />
+        </template>
+      </van-card>
+    </div>
 
   </div>
 </template>
@@ -61,6 +80,16 @@ export default {
         {text: '记单词', value: 0},
         {text: '背单词', value: 1}
       ],
+      wordToRemember: [],
+      reviewPercentage: 0,
+      reviewContent: '',
+      reviewDesc: '',
+      wordToReview: [],
+      reviewSum: 0,
+      reviewAnswerShowed: false,
+      currentReviewWord: {english: '', phonogram: '', chinese: ''},
+      reviewProcessButtonText: '已牢记',
+      reviewProcessButtonDisabled: false,
       wordData: {
         '3I': {
           'U1': [
@@ -134,8 +163,16 @@ export default {
           'U8': [],
           'U9': []
         }
-      },
-      wordToRemember: []
+      }
+    }
+  },
+  watch: {
+    reviewAnswerShowed: function(newValue, oldValue) {
+      if (newValue == true) {
+        this.reviewProcessButtonText = '下一个'
+      } else {
+        this.reviewProcessButtonText = '已牢记'
+      }
     }
   },
   created: function () {
@@ -144,14 +181,100 @@ export default {
   },
   methods: {
 
+    // 打乱数组
+    shuffleArray: function(array) {
+      let len = array.length;
+      for (let i = len - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array
+    },
+
     // 课本单元切换
     onUnitChanged: function(unit) {
       this.wordToRemember = this.wordData[this.level][this.unit]
+
+      // 若处于背单词模式下, 重置进度
+      if (this.mode == 1) {
+        this.resetReviewProgress()
+      }
+    },
+
+    // 模式切换
+    onModeChanged: function(mode) {
+
+      // 背单词模式
+      if (mode == 1) {
+        this.resetReviewProgress()
+      }
+
     },
 
     // 记单词模式下单词被点击时播放单词发音
     onRememberCardClicked: function(event) {
       event.currentTarget.querySelector("audio").play()
+    },
+
+    // 设置背单词卡片题面
+    setReviewCard: function(locator) {
+      var index = locator[0]
+      var reverse = locator[1]
+      this.currentReviewWord = this.wordData[this.level][this.unit][index]
+      if (reverse == true) {
+        this.reviewContent = this.currentReviewWord.chinese
+      } else {
+        this.reviewContent = this.currentReviewWord.english
+      }
+      this.reviewDesc = ''
+      this.reviewAnswerShowed = false
+    },
+
+    // 重置背单词进度
+    resetReviewProgress: function() {
+      this.wordToReview = []
+      for (var i = 0; i < this.wordData[this.level][this.unit].length; i++) {
+        var reverse
+        for (reverse in [true, false]) {
+          this.wordToReview.push([i, reverse])
+        }
+      }
+      this.shuffleArray(this.wordToReview)
+
+      this.reviewPercentage = 0
+      this.reviewSum = this.wordToReview.length
+      this.setReviewCard(this.wordToReview[0])
+      this.reviewProcessButtonDisabled = false
+    },
+
+    // 背单词模式下点击查看答案按钮
+    onReviewAnswerButtonClicked: function(event) {
+      this.reviewContent = this.currentReviewWord.english
+      this.reviewDesc = this.currentReviewWord.chinese
+      this.reviewAnswerShowed = true
+      this.wordToReview.push(this.wordToReview[0])  // 未记住的单词置于未尾, 之后复习
+    },
+
+    // 背单词模式下点击"下一个/已牢记"按钮
+    onReviewProcessButtonClicked: function(event) {
+
+      // 当前展示单词为最后一个且已显示答案, 禁用该按钮
+      if (this.wordToReview.length == 1 && this.reviewAnswerShowed == true) {
+        this.reviewPercentage = 100
+        this.reviewProcessButtonDisabled = true
+        return
+      }
+
+      if (this.reviewAnswerShowed == true) {
+        this.wordToReview.shift()
+        this.reviewPercentage = parseInt(100 - this.wordToReview.length / this.reviewSum * 100)
+        this.setReviewCard(this.wordToReview[0])
+      } else {
+        this.reviewContent = this.currentReviewWord.english
+        this.reviewDesc = this.currentReviewWord.chinese
+        this.reviewAnswerShowed = true
+      }
+
     }
 
   }
@@ -183,5 +306,11 @@ a {
 }
 .chinese-to-remember {
   font-size: large;
+}
+.review-card {
+  font-size: medium;
+}
+.review-card-button {
+  font-size: small;
 }
 </style>
