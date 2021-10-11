@@ -36,10 +36,28 @@
         :desc="reviewDesc"
       >
         <template #footer>
-          <van-button class="review-card-button" @click="resetReviewProgress">重置进度</van-button>
-          <van-button class="review-card-button" :disabled="reviewAnswerShowed" @click="onReviewAnswerButtonClicked">查看答案</van-button>
           <van-button
             class="review-card-button"
+            round
+            size="small"
+            @click="resetReviewProgress"
+          >
+            重置进度
+          </van-button>
+          <van-button
+            class="review-card-button"
+            round
+            size="small"
+            :disabled="reviewAnswerShowed"
+            @click="onReviewAnswerButtonClicked"
+          >
+            查看答案
+          </van-button>
+          <van-button
+            class="review-card-button"
+            round
+            size="small"
+            type="primary"
             :disabled="reviewProcessButtonDisabled"
             :text="reviewProcessButtonText"
             @click="onReviewProcessButtonClicked"
