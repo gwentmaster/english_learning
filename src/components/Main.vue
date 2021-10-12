@@ -271,26 +271,24 @@ export default {
       this.reviewDesc = this.currentReviewWord.chinese
       this.reviewAnswerShowed = true
       this.wordToReview.push(this.wordToReview[0])  // 未记住的单词置于未尾, 之后复习
+      this.wordToReview.shift()
     },
 
     // 背单词模式下点击"下一个/已牢记"按钮
     onReviewProcessButtonClicked: function(event) {
-
-      // 当前展示单词为最后一个且已显示答案, 禁用该按钮
-      if (this.wordToReview.length == 1 && this.reviewAnswerShowed == true) {
-        this.reviewPercentage = 100
-        this.reviewProcessButtonDisabled = true
-        return
-      }
-
-      if (this.reviewAnswerShowed == true) {
-        this.wordToReview.shift()
-        this.reviewPercentage = parseInt(100 - this.wordToReview.length / this.reviewSum * 100)
+      if (this.reviewAnswerShowed == true) {  // 下一个
         this.setReviewCard(this.wordToReview[0])
-      } else {
+      } else {  // 已牢记
         this.reviewContent = this.currentReviewWord.english
         this.reviewDesc = this.currentReviewWord.chinese
         this.reviewAnswerShowed = true
+        this.wordToReview.shift()
+        this.reviewPercentage = parseInt(100 - this.wordToReview.length / this.reviewSum * 100)
+
+        // 后续无单词则禁用按钮
+        if (this.wordToReview.length == 0) {
+          this.reviewProcessButtonDisabled = true
+        }
       }
 
     }
