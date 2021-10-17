@@ -10,18 +10,28 @@
 
     <!-- 记单词模式 -->
     <div v-if="mode == 0">
+      <van-row class="word-checkbox" type="flex" align="center">
+        <van-col span="7" offset="5"><van-checkbox v-model="shouldHideEnglish" @change="hideEnglish">隐藏英文</van-checkbox></van-col>
+        <van-col span="6" offset="6"><van-checkbox v-model="shouldHideChinese" @change="hideChinese">隐藏中文</van-checkbox></van-col>
+      </van-row>
       <div v-for="word in wordToRemember" @click="onRememberCardClicked">
-        <van-cell
-          clickable
-          center
-          size="large"
-          title-class="english-to-remember"
-          label-class="phonogram-to-remember"
-          value-class="chinese-to-remember"
-          :title="word.english"
-          :label="'/' + word.phonogram + '/'"
-          :value="word.chinese"
-        />
+        <van-cell clickable center size="large">
+          <template #title>
+            <div @click="englishClicked">
+              <span class="english-hide-noticer" hidden="hidden">点击查看</span>
+              <span class="english-to-remember">{{ word.english }}</span>
+            </div>
+          </template>
+          <template #label>
+            <span class="phonogram-to-remember">{{ '/' + word.phonogram + '/' }}</span>
+          </template>
+          <template>
+            <div>
+              <span class="chinese-hide-noticer" hidden="hidden" @click="chineseClicked">点击查看</span>
+              <span class="chinese-to-remember" @click="chineseClicked">{{ word.chinese }}</span>
+            </div>
+          </template>
+        </van-cell>
         <audio :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=2'" :id="word.english"></audio>
       </div>
     </div>
@@ -99,6 +109,8 @@ export default {
         {text: '背单词', value: 1}
       ],
       wordToRemember: [],
+      shouldHideEnglish: false,
+      shouldHideChinese: false,
       reviewPercentage: 0,
       reviewContent: '',
       reviewDesc: '',
@@ -234,6 +246,78 @@ export default {
       event.currentTarget.querySelector("audio").play()
     },
 
+    hideEnglish: function(value) {
+      if (value == true) {
+        document.querySelectorAll("span.english-to-remember, span.phonogram-to-remember").forEach((span) => {
+          span.setAttribute("hidden", "hidden");
+        })
+        document.querySelectorAll("span.english-hide-noticer").forEach((span) => {
+          span.removeAttribute("hidden");
+        })
+      } else {
+        document.querySelectorAll("span.english-to-remember, span.phonogram-to-remember").forEach((span) => {
+          span.removeAttribute("hidden");
+        })
+        document.querySelectorAll("span.english-hide-noticer").forEach((span) => {
+          span.setAttribute("hidden", "hidden");
+        })
+      }
+    },
+
+    hideChinese: function(value) {
+      if (value == true) {
+        document.querySelectorAll("span.chinese-to-remember").forEach((span) => {
+          span.setAttribute("hidden", "hidden");
+        })
+        document.querySelectorAll("span.chinese-hide-noticer").forEach((span) => {
+          span.removeAttribute("hidden");
+        })
+      } else {
+        document.querySelectorAll("span.chinese-to-remember").forEach((span) => {
+          span.removeAttribute("hidden");
+        })
+        document.querySelectorAll("span.chinese-hide-noticer").forEach((span) => {
+          span.setAttribute("hidden", "hidden");
+        })
+      }
+    },
+
+    // 记单词模式下英文被点击
+    englishClicked: function(event) {
+
+      // 无需隐藏英文, 则传播事件
+      if (this.shouldHideEnglish == false) {
+        return true;
+      }
+
+      // 阻止事件传播, 防止点击后播放发音
+      event.stopPropagation();
+
+      // 切换英文及音标显示状态
+      event.currentTarget.parentElement.querySelectorAll("span").forEach((span) => {
+        if (span.hasAttribute("hidden") == true) {
+          span.removeAttribute("hidden");
+        } else {
+          span.setAttribute("hidden", "hidden");
+        }
+      })
+    },
+
+    // 记单词模式下中文被点击
+    chineseClicked: function(event) {
+      if (this.shouldHideChinese == false) {
+        return true;
+      }
+      event.stopPropagation();
+      event.currentTarget.parentElement.querySelectorAll("span").forEach((span) => {
+        if (span.hasAttribute("hidden") == true) {
+          span.removeAttribute("hidden");
+        } else {
+          span.setAttribute("hidden", "hidden");
+        }
+      })
+    },
+
     // 设置背单词卡片题面
     setReviewCard: function(locator) {
       var index = locator[0]
@@ -314,6 +398,9 @@ a {
   color: #42b983;
 }
 
+.word-checkbox {
+  min-height: 5rem;
+}
 .english-to-remember {
   font-size: xx-large;
 }
