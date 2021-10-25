@@ -186,7 +186,20 @@ export default {
             {english: 'head', phonogram: 'hed', chinese: 'n. 头'},
             {english: 'small', phonogram: 'smɔːl', chinese: 'adj. 小的'}
           ],
-          'U4': [],
+          'U4': [
+            {english: 'who', phonogram: 'huː', chinese: 'pron. 谁；什么人'},
+            {english: 'she', phonogram: 'ʃi; ʃiː', chinese: 'pron. 她（主格）；它（用来指雌性动物或国家、船舶、地球、月亮等）'},
+            {english: 'new', phonogram: 'nuː', chinese: 'adj. 新的，新鲜的'},
+            {english: 'teacher', phonogram: 'ˈtiːtʃər', chinese: 'n. 教师；导师'},
+            {english: 'ruler', phonogram: 'ˈruːlər', chinese: 'n. 统治者，管理者；尺子，直尺；'},
+            {english: 'eraser', phonogram: 'ɪˈreɪsər', chinese: 'n. 橡皮'},
+            {english: 'desk', phonogram: 'desk', chinese: 'n. 书桌，办公桌'},
+            {english: 'that', phonogram: 'ðæt', chinese: 'det. 那，那个'},
+            {english: 'pupil', phonogram: 'ˈpjuːpl', chinese: 'n. 学生；瞳孔；未成年人'},
+            {english: 'he', phonogram: 'hi; iː; i; hiː', chinese: 'pron. 他'},
+            {english: 'Mr', phonogram: 'ˈmɪstər', chinese: 'n. （用于男子的姓或姓名前）先生'},
+            {english: 'our', phonogram: 'ɑːr; ˈaʊər', chinese: 'det. 我们的'}  
+          ],
           'U5': [],
           'U6': [],
           'U7': [],
