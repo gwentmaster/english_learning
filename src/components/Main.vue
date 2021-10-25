@@ -200,11 +200,66 @@ export default {
             {english: 'Mr', phonogram: 'ˈmɪstər', chinese: 'n. （用于男子的姓或姓名前）先生'},
             {english: 'our', phonogram: 'ɑːr; ˈaʊər', chinese: 'det. 我们的'}  
           ],
-          'U5': [],
-          'U6': [],
-          'U7': [],
-          'U8': [],
-          'U9': []
+          'U5': [
+            {english: 'go', phonogram: 'ɡoʊ', chinese: 'vi. 走；达到'},
+            {english: 'school', phonogram: 'skuːl', chinese: 'n. 学校'},
+            {english: 'OK', phonogram: 'ˌoʊˈkeɪ', chinese: 'int. （表同意）好，可以'},
+            {english: 'where', phonogram: 'wer', chinese: 'adv. 在哪里'},
+            {english: 'on', phonogram: 'ɑːn', chinese: 'prep. 在……之上'},
+            {english: 'the', phonogram: 'ðə; ði; ðiː', chinese: 'art. 这；那'},
+            {english: 'table', phonogram: 'ˈteɪbl', chinese: 'n. 桌子'},
+            {english: 'red', phonogram: 'red', chinese: 'adj. 红的，红色的'},
+            {english: 'chair', phonogram: 'tʃer', chinese: 'n. 椅子'},
+            {english: 'colour', phonogram: 'ˈkʌlər', chinese: 'n. 颜色'},
+            {english: 'blue', phonogram: 'bluː', chinese: 'adj. 蓝色的'}        
+          ],
+          'U6': [
+            {english: 'see', phonogram: 'siː', chinese: 'vt. 看见；理解；领会'},
+            {english: 'egg', phonogram: 'eɡ', chinese: 'n. 蛋'},
+            {english: 'apple', phonogram: 'ˈæpl', chinese: 'n. 苹果'},
+            {english: 'evening', phonogram: 'ˈiːvnɪŋ', chinese: 'n. 晚上；傍晚'},
+            {english: 'please', phonogram: 'pliːz', chinese: 'int. 请（礼貌用语）'},
+            {english: 'how', phonogram: 'haʊ', chinese: 'adv. 怎样，如何；（用于询问数量、程度）多少，怎么'},
+            {english: 'many', phonogram: 'ˈmeni', chinese: 'det. 许多'},
+            {english: 'green', phonogram: 'ɡriːn', chinese: 'adj. 绿色的'},
+            {english: 'yellow', phonogram: 'ˈjeloʊ', chinese: 'adj. 黄色的'},
+            {english: 'mum', phonogram: 'mʌm', chinese: 'n. （非正式）妈妈'},
+            {english: 'there', phonogram: 'ðer', chinese: 'adv. 在那里；在那边'}
+          ],
+          'U7': [
+            {english: 'happy', phonogram: 'ˈhæpi', chinese: 'adj. 快乐的；使人高兴的'},
+            {english: 'birthday', phonogram: 'ˈbɜːrθdeɪ', chinese: 'n. 生日，诞辰；诞生的日子'},
+            {english: 'old', phonogram: 'oʊld', chinese: 'adj. 陈旧的，古老的；年老的'},
+            {english: 'ten', phonogram: 'ten', chinese: 'num. 十个，十'},
+            {english: 'year', phonogram: 'jɪr', chinese: 'n. 年；年度'},
+            {english: 'at', phonogram: 'ət; æt', chinese: 'prep. 在（表示存在或出现的地点、场所、位置、空间）'},
+            {english: 'cake', phonogram: 'keɪk', chinese: 'n. 蛋糕；饼状食物，饼；'},
+            {english: 'for', phonogram: 'fər; fɔːr', chinese: 'prep. （表示对象、用途等）给，对；为了'},
+            {english: 'card', phonogram: 'kɑːrd', chinese: 'n. 卡片；纸牌；明信片'},
+            {english: 'gift', phonogram: 'ɡɪft', chinese: 'n. 礼物；才能，天赋'},
+            {english: 'beautiful', phonogram: 'ˈbjuːtɪfl', chinese: 'adj. 美丽的'},
+            {english: 'basketball', phonogram: 'ˈbæskɪtbɔːl', chinese: 'n. 篮球'},
+            {english: 'they', phonogram: 'ðeɪ', chinese: 'pron. 他们；它们；她们'},
+            {english: 'draw', phonogram: 'drɔː', chinese: 'vt. 画'}
+          ],
+          'U8': [
+            {english: 'PE', phonogram: 'ˌpiː ˈiː', chinese: 'abbr. 体育课，体能训练（physical education）'},
+            {english: 'like', phonogram: 'laɪk', chinese: 'v. 喜欢；想；愿意；希望 prep. 像，如同'},
+            {english: 'me', phonogram: 'mi; miː', chinese: 'pron. 我（宾格）'},
+            {english: 'shoot', phonogram: 'ʃuːt', chinese: 'vt. 射门；射击，射中'},
+            {english: 'goal', phonogram: 'ɡoʊl', chinese: 'n. 球门；进球得分；目标，目的'},
+            {english: 'English', phonogram: 'ˈɪŋɡlɪʃ', chinese: 'n. 英文, 英语 adj. 英文的'},
+            {english: 'Chinese', phonogram: 'ˌtʃaɪˈniːz', chinese: 'n. 中文，汉语；中国人 adj. 中文的, 中国的'},
+            {english: 'music', phonogram: 'ˈmjuːzɪk', chinese: 'n. 音乐，乐曲'}
+          ],
+          'U9': [
+            {english: 'fish', phonogram: 'fɪʃ', chinese: 'n. 鱼'},
+            {english: 'ugly', phonogram: 'ˈʌɡli', chinese: 'adj. 丑陋的，难看的'},
+            {english: 'cool', phonogram: 'kuːl', chinese: 'adj. 凉的，凉爽的；冷静的，沉着的；时髦的，酷的'},
+            {english: 'cat', phonogram: 'kæt', chinese: 'n. 猫，猫科动物'},
+            {english: 'cute', phonogram: 'kjuːt', chinese: 'adj. 漂亮的，可爱的'},
+            {english: 'dog', phonogram: 'dɔːɡ', chinese: 'n. 狗'}
+          ]
         }
       }
     }
