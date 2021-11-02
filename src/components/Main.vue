@@ -32,7 +32,8 @@
             </div>
           </template>
         </van-cell>
-        <audio :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=2'" :id="word.english"></audio>
+        <audio v-if="word.english !== 'she'" :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=2'" :id="word.english"></audio>
+        <audio v-if="word.english == 'she'" :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=1'" :id="word.english"></audio>
       </div>
     </div>
 
