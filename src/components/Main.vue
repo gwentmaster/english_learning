@@ -293,7 +293,7 @@ export default {
             {english: 'May', phonogram: 'meɪ', chinese: 'n. 五月'},
             {english: 'June', phonogram: 'dʒuːn', chinese: 'n. 六月'},
             {english: 'July', phonogram: 'dʒuˈlaɪ', chinese: 'n. 七月'},
-            {english: 'August', phonogram: 'ˈɔːɡəst', chinese: 'n. 八月'},
+            {english: 'August', phonogram: 'ˈɔːɡəst', chinese: 'n. 八月', useBritish: true},
             {english: 'September', phonogram: 'sepˈtembər', chinese: 'n. 九月'},
             {english: 'October', phonogram: 'ɑːkˈtoʊbər', chinese: 'n. 十月'},
             {english: 'November', phonogram: 'noʊˈvembər', chinese: 'n. 十一月'},
