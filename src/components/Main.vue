@@ -32,8 +32,8 @@
             </div>
           </template>
         </van-cell>
-        <audio v-if="word.english !== 'she'" :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=2'" :id="word.english"></audio>
-        <audio v-if="word.english == 'she'" :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=1'" :id="word.english"></audio>
+        <audio v-if="!(word.useBritish == true)" :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=2'" :id="word.english"></audio>
+        <audio v-if="word.useBritish == true" :src="'https://dict.youdao.com/dictvoice?audio=' + word.english + '&type=1'" :id="word.english"></audio>
       </div>
     </div>
 
@@ -102,7 +102,9 @@ export default {
           {text: 'Unit 6', value: 'U6'},
           {text: 'Unit 7', value: 'U7'},
           {text: 'Unit 8', value: 'U8'},
-          {text: 'Unit 9', value: 'U9'}
+          {text: 'Unit 9', value: 'U9'},
+          {text: '数字', value: 'numbers'},
+          {text: '月份', value: 'monthes'}
         ]
       },
       modeOption: [
@@ -189,8 +191,8 @@ export default {
           ],
           'U4': [
             {english: 'who', phonogram: 'huː', chinese: 'pron. 谁；什么人'},
-            {english: 'she', phonogram: 'ʃi; ʃiː', chinese: 'pron. 她（主格）；它（用来指雌性动物或国家、船舶、地球、月亮等）'},
-            {english: 'new', phonogram: 'nuː', chinese: 'adj. 新的，新鲜的'},
+            {english: 'she', phonogram: 'ʃi; ʃiː', chinese: 'pron. 她（主格）；它（用来指雌性动物或国家、船舶、地球、月亮等）', useBritish: true},
+            {english: 'new', phonogram: 'njuː', chinese: 'adj. 新的，新鲜的'},
             {english: 'teacher', phonogram: 'ˈtiːtʃər', chinese: 'n. 教师；导师'},
             {english: 'ruler', phonogram: 'ˈruːlər', chinese: 'n. 统治者，管理者；尺子，直尺；'},
             {english: 'eraser', phonogram: 'ɪˈreɪsər', chinese: 'n. 橡皮'},
@@ -228,7 +230,7 @@ export default {
             {english: 'there', phonogram: 'ðer', chinese: 'adv. 在那里；在那边'}
           ],
           'U7': [
-            {english: 'happy', phonogram: 'ˈhæpi', chinese: 'adj. 快乐的；使人高兴的'},
+            {english: 'happy', phonogram: 'ˈhæpi', chinese: 'adj. 快乐的；使人高兴的', useBritish: true},
             {english: 'birthday', phonogram: 'ˈbɜːrθdeɪ', chinese: 'n. 生日，诞辰；诞生的日子'},
             {english: 'old', phonogram: 'oʊld', chinese: 'adj. 陈旧的，古老的；年老的'},
             {english: 'ten', phonogram: 'ten', chinese: 'num. 十个，十'},
@@ -260,6 +262,42 @@ export default {
             {english: 'cat', phonogram: 'kæt', chinese: 'n. 猫，猫科动物'},
             {english: 'cute', phonogram: 'kjuːt', chinese: 'adj. 漂亮的，可爱的'},
             {english: 'dog', phonogram: 'dɔːɡ', chinese: 'n. 狗'}
+          ],
+          'numbers': [
+            {english: 'one', phonogram: 'wʌn', chinese: 'num. 一；一个；一岁；一点钟'},
+            {english: 'two', phonogram: 'tuː', chinese: 'n. 两个'},
+            {english: 'three', phonogram: 'θriː', chinese: 'n. 三，三个'},
+            {english: 'four', phonogram: 'fɔːr', chinese: 'num. 四，四个'},
+            {english: 'five', phonogram: 'faɪv', chinese: 'n. 五，五个'},
+            {english: 'six', phonogram: 'sɪks', chinese: 'num. 数字6；六个'},
+            {english: 'seven', phonogram: 'ˈsev(ə)n', chinese: 'num. 七个，七'},
+            {english: 'eight', phonogram: 'eɪt', chinese: 'num. 八；八个'},
+            {english: 'nine', phonogram: 'naɪn', chinese: 'n. 九，九个'},
+            {english: 'ten', phonogram: 'ten', chinese: 'num. 十个，十'},
+            {english: 'eleven', phonogram: 'ɪˈlevn', chinese: 'n. 十一；十一个'},
+            {english: 'twelve', phonogram: 'twelv', chinese: 'n. 十二；十二个'},
+            {english: 'thirteen', phonogram: 'ˌθɜːrˈtiːn', chinese: 'n. 十三；十三岁；十三个'},
+            {english: 'fourteen', phonogram: 'ˌfɔːrˈtiːn', chinese: 'num. 十四；十四个'},
+            {english: 'fifteen', phonogram: 'ˌfɪfˈtiːn', chinese: 'n. 十五；十五个'},
+            {english: 'sixteen', phonogram: 'ˌsɪksˈtiːn', chinese: 'num. 十六；十六个'},
+            {english: 'seventeen', phonogram: 'ˌsevnˈtiːn', chinese: 'n. 十七，十七个'},
+            {english: 'eighteen', phonogram: 'ˌeɪˈtiːn', chinese: 'n. 十八，十八个'},
+            {english: 'nineteen', phonogram: 'ˌnaɪnˈtiːn', chinese: 'num. 十九'},
+            {english: 'twenty', phonogram: 'ˈtwenti', chinese: 'n. 二十；二十年代'}
+          ],
+          'monthes': [
+            {english: 'January', phonogram: 'ˈdʒænjueri', chinese: 'n. 一月'},
+            {english: 'February', phonogram: 'ˈfebrueri', chinese: 'n. 二月'},
+            {english: 'March', phonogram: 'mɑːrtʃ', chinese: 'n. 三月'},
+            {english: 'April', phonogram: 'ˈeɪprəl', chinese: 'n. 四月'},
+            {english: 'May', phonogram: 'meɪ', chinese: 'n. 五月'},
+            {english: 'June', phonogram: 'dʒuːn', chinese: 'n. 六月'},
+            {english: 'July', phonogram: 'dʒuˈlaɪ', chinese: 'n. 七月'},
+            {english: 'August', phonogram: 'ˈɔːɡəst', chinese: 'n. 八月'},
+            {english: 'September', phonogram: 'sepˈtembər', chinese: 'n. 九月'},
+            {english: 'October', phonogram: 'ɑːkˈtoʊbər', chinese: 'n. 十月'},
+            {english: 'November', phonogram: 'noʊˈvembər', chinese: 'n. 十一月'},
+            {english: 'December', phonogram: 'dɪˈsembər', chinese: 'n. 十二月'}
           ]
         }
       }
